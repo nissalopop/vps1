@@ -1,4 +1,4 @@
-name: INDICLOUD # VPS 1
+name: Continuous Persistent VPS
 
 on:
   schedule:
@@ -55,15 +55,15 @@ jobs:
         run: |
           sudo tailscaled &
           sleep 8
-          sudo tailscale up --authkey ${{ secrets.TAILSCALE_AUTHKEY }} --hostname=flyhost || echo "Tailscale already up"
+          sudo tailscale up --authkey ${{ secrets.TAILSCALE_AUTHKEY }} --hostname=indicloud || echo "Tailscale already up"
 
       - name: Create user indicloud with sudo
         run: |
-          if ! id -u flyhost >/dev/null 2>&1; then
-            sudo useradd -m -s /bin/bash flyhost
-            echo "indicloud:indicloudgg" | sudo chpasswd
-            sudo usermod -aG sudo flyhost
-            echo "flyhost ALL=(ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/flyhost
+          if ! id -u indicloud >/dev/null 2>&1; then
+            sudo useradd -m -s /bin/bash indicloud
+            echo "indicloud:gg12paid" | sudo chpasswd
+            sudo usermod -aG sudo indicloud
+            echo "indicloud ALL=(ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/indicloud
           fi
 
       - name: Start tmate session for SSH access
